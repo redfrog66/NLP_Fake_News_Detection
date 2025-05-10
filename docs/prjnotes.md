@@ -33,7 +33,7 @@
 - Hook it up to the model so it gives a "Real" or "Fake" result  
 - Make the result look clean and clear
 
-### Phase 3: Add ChatGPT Magic (Bonus Step)
+### Phase 3: Add ChatGPT Magic
 - Add a tiny ChatGPT box for follow-up questions  
 - Example: "Why is this fake?" or let chatGPT generate a random true/fake news
 
