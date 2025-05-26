@@ -77,15 +77,34 @@
       border: 2px solid #ccc;
       margin-bottom: 20px;
     }
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .btn-row .main-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .btn-row .generate-btns {
+      display: flex;
+      gap: 10px;
+    }
     button {
       padding: 20px 30px;
       font-size: 1.5em;
-      margin-right: 20px;
       border: none;
       border-radius: 10px;
       background-color: #007BFF;
       color: white;
       cursor: pointer;
+    }
+    .generate-btns button {
+      padding: 10px 20px;
+      font-size: 1em;
     }
     button:hover {
       background-color: #0056b3;
@@ -105,9 +124,16 @@
       <!-- Messages will appear here -->
     </div>
     <textarea id="newsInput" rows="3" placeholder="Paste your news here..."></textarea>
-    <br>
-    <button onclick="sendMessage()">Send</button>
-    <button onclick="explainWhy()">Explain why</button>
+    <div class="btn-row">
+      <div class="main-btns">
+        <button onclick="sendMessage()">Send</button>
+        <button onclick="explainWhy()">Explain why</button>
+      </div>
+      <div class="generate-btns">
+        <button onclick="generateFakeNews()">Fake News</button>
+        <button onclick="generateTrueNews()">True News</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -135,6 +161,16 @@
       setTimeout(() => {
         appendMessage('bot', `Explanation: This news contains typical patterns often found in misleading or unverified stories, such as emotionally charged language or lack of credible sources.`);
       }, 500);
+    }
+
+    function generateFakeNews() {
+      const fake = "Breaking: Aliens spotted in downtown shopping mall holding anti-capitalist signs!";
+      newsInput.value = fake;
+    }
+
+    function generateTrueNews() {
+      const truth = "UN announces new global education initiative to support underserved communities.";
+      newsInput.value = truth;
     }
 
     function appendMessage(sender, text) {
