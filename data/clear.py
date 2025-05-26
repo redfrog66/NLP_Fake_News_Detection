@@ -14,14 +14,21 @@ true_df['label'] = 1
 # Combine datasets
 df = pd.concat([fake_df, true_df], ignore_index=True)
 
-# Define a basic text cleaning function
+# Define enhanced text cleaning function
+custom_stopwords = set([
+    'the', 'and', 'is', 'in', 'to', 'of', 'for', 'on', 'with', 'a', 'an', 'by',
+    'at', 'from', 'or', 'as', 'that', 'this', 'it', 'be', 'are', 'was', 'were'
+])
+
 def clean_text(text):
     text = str(text)
-    text = re.sub(r"http\\S+|www\\.\\S+", "", text)         # Remove URLs
-    text = re.sub(r"[^a-zA-Z0-9\\s]", "", text)             # Remove punctuation
+    text = re.sub(r"http\\S+|www\\.\\S+", "", text)  # Remove URLs
+    text = re.sub(r"[^a-zA-Z\\s]", "", text)            # Remove punctuation and numbers
     text = text.lower()                                     # Lowercase
-    text = re.sub(r"\\s+", " ", text).strip()               # Remove extra whitespace
-    return text
+    text = re.sub(r"\\s+", " ", text).strip()            # Remove extra whitespace
+    words = text.split()
+    words = [word for word in words if word not in custom_stopwords and len(word) > 2]  # Filter
+    return " ".join(words)
 
 # Apply cleaning to relevant columns
 if 'text' in df.columns:
