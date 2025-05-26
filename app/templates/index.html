@@ -28,6 +28,12 @@
       font-size: 1.5em;
       margin-bottom: 3em;
     }
+    .button-container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
     a.button {
       display: inline-block;
       padding: 30px 50px;
@@ -41,11 +47,39 @@
     a.button:hover {
       background-color: #0056b3;
     }
-  </style>
+      .github-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #333;
+      color: white;
+      padding: 16px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.5em;
+    }
+    .github-button:hover::after {
+      content: "Would you like to visit the github repository?";
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #000;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-size: 0.8em;
+      margin-top: 5px;
+      z-index: 10;
+      white-space: nowrap;
+    }
+</style>
 </head>
 <body>
+  <a href="https://github.com/redfrog66/NLP_Fake_News_Detection.git" class="github-button" target="_blank">🐙</a>
   <h1>NLP Fake News Detector</h1>
   <p>Welcome to our Fake News Detector project. This tool uses Natural Language Processing to analyze news content and detect whether it's real or fake. Ready to try it out?</p>
-  <a href="/analyze" class="button">Start Analyzing</a>
+  <div class="button-container">
+    <a href="/analyze" class="button">Start Analyzing</a>
+  </div>
 </body>
 </html>

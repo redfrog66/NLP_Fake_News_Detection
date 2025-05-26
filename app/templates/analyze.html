@@ -114,9 +114,35 @@
       margin-bottom: 40px;
       text-align: center;
     }
-  </style>
+      .github-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #333;
+      color: white;
+      padding: 16px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.5em;
+    }
+    .github-button:hover::after {
+      content: "Would you like to visit the github repository?";
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #000;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-size: 0.8em;
+      margin-top: 5px;
+      z-index: 10;
+      white-space: nowrap;
+    }
+</style>
 </head>
 <body>
+  <a href="https://github.com/redfrog66/NLP_Fake_News_Detection.git" class="github-button" target="_blank">🐙</a>
   <a href="/index" class="home-button">⟵ Home</a>
   <div class="chat-container">
     <h1>Fake News Chat</h1>
