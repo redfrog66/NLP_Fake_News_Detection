@@ -171,13 +171,19 @@
       if (text === '') return;
       appendMessage('user', text);
 
-      const result = Math.random() > 0.5 ? 'Real' : 'Fake';
-      setTimeout(() => {
-        appendMessage('bot', `This news is likely: <strong>${result}</strong>`);
-      }, 500);
+      fetch('/predict', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      })
+      .then(res => res.json())
+      .then(data => {
+        appendMessage('bot', `This news is likely: <strong>${data.label}</strong> (confidence: ${data.confidence})`);
+      });
 
       newsInput.value = '';
     }
+
 
     function explainWhy() {
       const messages = chatBox.querySelectorAll('.user');

@@ -1,6 +1,6 @@
-from flask import Flask, render_template
-
-app = Flask(__name__)
+from flask import render_template, request, jsonify
+from app import app
+from models.tfidf_model import predict_news
 
 @app.route("/")
 @app.route("/index")
@@ -11,5 +11,15 @@ def index():
 def analyze():
     return render_template("analyze.html")
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route("/predict", methods=["POST"])
+def predict():
+    data = request.get_json()
+    text = data.get("text", "")
+    if not text:
+        return jsonify({"error": "No text provided"}), 400
+
+    label, confidence = predict_news(text)
+    return jsonify({
+        "label": "Real" if label == 1 else "Fake",
+        "confidence": confidence
+    })
