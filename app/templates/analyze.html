@@ -185,24 +185,36 @@
     }
 
 
-    function explainWhy() {
-      const messages = chatBox.querySelectorAll('.user');
-      if (messages.length === 0) return;
-      const lastNews = messages[messages.length - 1].innerText;
+      function explainWhy() {
+        const messages = chatBox.querySelectorAll('.user');
+        if (messages.length === 0) return;
+        const lastNews = messages[messages.length - 1].innerText;
 
-      setTimeout(() => {
-        appendMessage('bot', `Explanation: This news contains typical patterns often found in misleading or unverified stories, such as emotionally charged language or lack of credible sources.`);
-      }, 500);
-    }
+        fetch('/explain', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: lastNews })
+        })
+        .then(res => res.json())
+        .then(data => {
+          appendMessage('bot', `<em>${data.explanation}</em>`);
+        });
+      }
 
     function generateFakeNews() {
-      const fake = "Breaking: Aliens spotted in downtown shopping mall holding anti-capitalist signs!";
-      newsInput.value = fake;
+      fetch('/generate_fake')
+        .then(res => res.json())
+        .then(data => {
+          newsInput.value = data.text;
+        });
     }
 
     function generateTrueNews() {
-      const truth = "UN announces new global education initiative to support underserved communities.";
-      newsInput.value = truth;
+      fetch('/generate_true')
+        .then(res => res.json())
+        .then(data => {
+          newsInput.value = data.text;
+        });
     }
 
     function appendMessage(sender, text) {
